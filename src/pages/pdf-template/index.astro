@@ -1,0 +1,20 @@
+---
+import PDFLayout from "../../layouts/PDFLayout.astro";
+import Page1 from "./pages/page1.astro";
+import Page2 from "./pages/page2.astro";
+export const prerender = false;
+const isPost = Astro.request?.method === "POST";
+let body: any = {};
+
+if (isPost) {
+  body = await Astro.request.json();
+}
+
+const id = body.id
+
+---
+
+<PDFLayout title="Documento PDF">
+  <Page1 id={id} />
+  <Page2 />
+</PDFLayout>

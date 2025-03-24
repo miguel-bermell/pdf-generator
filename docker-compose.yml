@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  ms-pdf:
+    container_name: ms-pdf
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: astro
+    networks:
+      - pdf
+    volumes:
+      - .:/app
+    ports:
+      - 4321:4321
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=development
+    command: npm run dev -- --host
+
+  pdf-worker:
+    container_name: pdf-worker
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: pdf
+    networks:
+      - pdf
+    depends_on:
+      - rabbitmq
+    volumes:
+      - .:/app
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=dev
+    command: npm run dev:worker
+
+  dozzle:
+    container_name: dozzle
+    image: amir20/dozzle:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    ports:
+      - 8888:8080
+    restart: unless-stopped
+  
+  rabbitmq:
+    container_name: rabbitmq
+    image: 'rabbitmq:3.8-management'
+    networks:
+      - pdf
+    restart: unless-stopped
+    ports:
+      - 5672:5672
+      - 15672:15672
+
+networks:
+  pdf:

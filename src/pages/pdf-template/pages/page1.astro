@@ -1,0 +1,11 @@
+---
+import Page from "../../../components/Page.astro";
+export const title = "Página 1";
+const { id } = Astro.props;
+console.log('id :>> ', id);
+---
+
+<Page title={title}>
+  <p class="text-gray-700">Este es el contenido de la primera página.</p>
+  <p class="text-gray-700">El ID de este documento es {id}.</p>
+</Page>

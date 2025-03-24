@@ -1,0 +1,23 @@
+{
+  "name": "nuclear-neptune",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "dev:worker": "tsx watch src/worker/worker.ts",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.0.15",
+    "amqplib": "^0.10.5",
+    "astro": "^5.5.4",
+    "playwright": "^1.51.1",
+    "tailwindcss": "^4.0.15",
+    "tsx": "^4.19.3"
+  },
+  "devDependencies": {
+    "@types/amqplib": "^0.10.7"
+  }
+}
