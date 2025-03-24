@@ -2,19 +2,13 @@
 import PDFLayout from "../../layouts/PDFLayout.astro";
 import Page1 from "./pages/page1.astro";
 import Page2 from "./pages/page2.astro";
+import getCommonData from "../../lib/utils/getCommonData";
 export const prerender = false;
 const isPost = Astro.request?.method === "POST";
-let body: any = {};
-
-if (isPost) {
-  body = await Astro.request.json();
-}
-
-const id = body.id
-
+const props = isPost ? await Astro.request.json() : await getCommonData(Astro.url.pathname, 'es')
 ---
 
 <PDFLayout title="Documento PDF">
-  <Page1 id={id} />
+  <Page1 {...props} />
   <Page2 />
 </PDFLayout>

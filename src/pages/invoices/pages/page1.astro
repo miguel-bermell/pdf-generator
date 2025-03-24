@@ -1,0 +1,91 @@
+---
+import Page from "../../../components/Page.astro";
+export const title = "Página 1";
+export const prerender = false;
+interface Props {
+  id: string;
+  date: string;
+  customer: {
+    name: string;
+    email: string;
+    address: string;
+  };
+  items: {
+    description: string;
+    quantity: number;
+    price: number;
+  }[];
+  subtotal: number;
+  tax: number;
+  total: number;
+  notes: string;
+}
+const { id, date, customer, items, subtotal, tax, total, notes } = Astro.props;
+---
+
+<Page title={title}>
+  <div class="mx-auto space-y-6">
+    <!-- Encabezado de la factura -->
+    <div>
+      <h1 class="text-3xl font-bold mb-2">Factura: {id}</h1>
+      <p class="text-gray-700"><strong>Fecha:</strong> {date}</p>
+    </div>
+
+    <!-- Información del cliente -->
+    <div class="border p-4 rounded-lg bg-gray-50">
+      <h2 class="text-2xl font-semibold mb-2">Información del Cliente</h2>
+      <p class="text-gray-700"><strong>Nombre:</strong> {customer.name}</p>
+      <p class="text-gray-700"><strong>Email:</strong> {customer.email}</p>
+      <p class="text-gray-700">
+        <strong>Dirección:</strong>
+        {customer.address}
+      </p>
+    </div>
+
+    <!-- Detalles de la factura -->
+    <div class="border p-4 rounded-lg bg-gray-50">
+      <h2 class="text-2xl font-semibold mb-2">Detalles de la Factura</h2>
+      <table class="min-w-full border-collapse">
+        <thead>
+          <tr>
+            <th class="border px-4 py-2 bg-gray-200">Descripción</th>
+            <th class="border px-4 py-2 bg-gray-200">Cantidad</th>
+            <th class="border px-4 py-2 bg-gray-200">Precio</th>
+            <th class="border px-4 py-2 bg-gray-200">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            items.map((item) => (
+              <tr>
+                <td class="border px-4 py-2">{item.description}</td>
+                <td class="border px-4 py-2">{item.quantity}</td>
+                <td class="border px-4 py-2">${item.price.toFixed(2)}</td>
+                <td class="border px-4 py-2">
+                  ${(item.quantity * item.price).toFixed(2)}
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+      <div class="mt-4 text-right">
+        <p class="text-gray-700">
+          <strong>Subtotal:</strong> ${subtotal.toFixed(2)}
+        </p>
+        <p class="text-gray-700">
+          <strong>Impuestos:</strong> ${tax.toFixed(2)}
+        </p>
+        <p class="text-gray-900 text-xl font-bold">
+          <strong>Total:</strong> ${total.toFixed(2)}
+        </p>
+      </div>
+    </div>
+
+    <!-- Notas -->
+    <div class="border p-4 rounded-lg bg-gray-50">
+      <h2 class="text-2xl font-semibold mb-2">Notas</h2>
+      <p class="text-gray-700">{notes}</p>
+    </div>
+  </div>
+</Page>

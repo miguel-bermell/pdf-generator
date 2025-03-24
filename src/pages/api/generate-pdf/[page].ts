@@ -4,10 +4,10 @@ import { sendToQueue } from "../../../lib/amqp";
 export const prerender = false;
 
 export const POST: APIRoute = async ({ params, request }) => {
-  const { type } = params;
+  const { page } = params;
   const body = await request.json();
 
-  const url = `http://ms-pdf:4321/${type}`;
+  const url = `http://ms-pdf:4321/${page}`;
 
   await sendToQueue(url, body);
   

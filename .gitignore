@@ -6,6 +6,7 @@ dist/
 
 # dependencies
 node_modules/
+generated_pdfs/
 
 # logs
 npm-debug.log*
