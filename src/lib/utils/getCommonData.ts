@@ -5,9 +5,10 @@ const sanitizePathName = (path: string): Pages => {
   return path.replace(/\//g, '') as Pages;
 }
 
-export default (page: string, language: Languages): Promise<any> => {
+export default async (page: string, language: Languages): Promise<any> => {
   try {
-    return import(`../data/${sanitizePathName(page)}/${language}`).then((data) => data.default);
+    const data = await import(`../data/${sanitizePathName(page)}/${language}/index.ts`);
+    return data.default;
   } catch (error) {
     throw new Error(`Error loading data for ${page} in ${language}`);
   }

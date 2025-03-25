@@ -1,6 +1,5 @@
 ---
 import Page from "../../../components/Page.astro";
-export const title = "Página 1";
 export const prerender = false;
 interface Props {
   id: string;
@@ -23,7 +22,7 @@ interface Props {
 const { id, date, customer, items, subtotal, tax, total, notes } = Astro.props;
 ---
 
-<Page title={title}>
+<Page title={`Factura: ${id}`}>
   <div class="mx-auto space-y-6">
     <!-- Encabezado de la factura -->
     <div>

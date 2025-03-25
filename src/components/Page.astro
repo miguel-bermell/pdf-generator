@@ -2,7 +2,7 @@
 const { title } = Astro.props;
 ---
 
-<div class="page min-h-screen relative break-after-page px-8 py-12">
+<div class="page min-h-screen relative break-after-page px-8 py-12 max-h-full">
   <header class="absolute top-0 left-0 w-full bg-gray-700 text-white py-4  text-center">
     <h1 class="text-lg font-bold">📄 {title}</h1>
   </header>
@@ -18,7 +18,7 @@ const { title } = Astro.props;
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", () => {
     const pages = document.querySelectorAll(".page");
     pages.forEach((page, index) => {
       const footer = page.querySelector(".page-number");
