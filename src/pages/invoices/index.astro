@@ -2,12 +2,14 @@
 import PDFLayout from "../../layouts/PDFLayout.astro";
 import Page1 from "./pages/page1.astro";
 import Page2 from "./pages/page2.astro";
+import PageCover from "./pages/page-cover.astro";
 import { getPageProps } from "../../lib/utils/getPageProps";
 export const prerender = false;
 const { props } = await getPageProps(Astro)
 ---
 
 <PDFLayout title="Documento PDF">
+  <PageCover />
   <Page1 {...props} />
   <Page2 />
 </PDFLayout>

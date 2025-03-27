@@ -1,0 +1,54 @@
+---
+import Page from "../../../components/Page.astro"; // O tu wrapper de página
+export const prerender = false;
+
+// Ejemplo de props si necesitas datos dinámicos
+const title = "BUSINESS PROPOSAL";
+const companyName = "COMPANY NAME";
+const contact = {
+  name: "CONTACT NAME",
+  email: "name@domain.com",
+  phone: "(123) 456-7890",
+  fax: "(123) 456-7890",
+  address: "Company address",
+};
+const logoUrl =
+  "https://upload.wikimedia.org/wikipedia/commons/a/ab/Logo_TV_2015.png"; // Cambia por tu logo
+---
+
+<Page title={title} isCoverPage>
+  <div class="w-full h-screen bg-[#f2f5f7] flex flex-col">
+    <!-- Encabezado con logo (top-right) -->
+    <header class="flex justify-end p-6">
+      <img src={logoUrl} alt="Logo" class="h-10" />
+    </header>
+
+    <!-- Contenido central -->
+    <main class="flex-1 flex flex-col justify-center items-center">
+      <h1 class="text-5xl font-bold text-[#00b9ff] mb-2">
+        {title}
+      </h1>
+      <div class="w-2/3">
+        <hr class="my-5 w-full h-0.5 border-t-0 bg-neutral-100" />
+      </div>
+      <p class="text-2xl text-gray-700">
+        {companyName}
+      </p>
+    </main>
+
+    <!-- Pie de página con información de contacto -->
+    <footer
+      class="bg-blue-300 text-white p-6 flex flex-col sm:flex-row sm:justify-between space-y-4 sm:space-y-0"
+    >
+      <div>
+        <p class="font-bold">{contact.name}</p>
+        <p>Email: {contact.email}</p>
+        <p>Phone: {contact.phone}</p>
+        <p>Fax: {contact.fax}</p>
+      </div>
+      <div class="sm:text-right">
+        <p>{contact.address}</p>
+      </div>
+    </footer>
+  </div>
+</Page>

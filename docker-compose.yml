@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    image: astro
+    image: pdf
     networks:
       - pdf
     volumes:

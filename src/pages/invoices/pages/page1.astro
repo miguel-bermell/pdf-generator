@@ -59,7 +59,7 @@ const { id, date, customer, items, subtotal, tax, total, notes } = Astro.props;
               <tr>
                 <td class="border px-4 py-2">{item.description}</td>
                 <td class="border px-4 py-2">{item.quantity}</td>
-                <td class="border px-4 py-2">${item.price.toFixed(2)}</td>
+                <td class="border px-4 py-2">{item.price.toFixed(2)}€</td>
                 <td class="border px-4 py-2">
                   ${(item.quantity * item.price).toFixed(2)}
                 </td>
@@ -70,13 +70,13 @@ const { id, date, customer, items, subtotal, tax, total, notes } = Astro.props;
       </table>
       <div class="mt-4 text-right">
         <p class="text-gray-700">
-          <strong>Subtotal:</strong> ${subtotal.toFixed(2)}
+          <strong>Subtotal:</strong> {subtotal.toFixed(2)}€
         </p>
         <p class="text-gray-700">
-          <strong>Impuestos:</strong> ${tax.toFixed(2)}
+          <strong>Impuestos:</strong> {tax.toFixed(2)}€
         </p>
         <p class="text-gray-900 text-xl font-bold">
-          <strong>Total:</strong> ${total.toFixed(2)}
+          <strong>Total:</strong> {total.toFixed(2)}€
         </p>
       </div>
     </div>
