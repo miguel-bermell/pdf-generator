@@ -18,6 +18,7 @@ async function getBrowser() {
 
 async function generatePDF(url: string, payload: any) {
   console.log(`⚙️ Worker ${process.pid} Generating PDF for: ${url}`);
+  console.time(`⏱️ Worker ${process.pid} PDF generation time`);
 
   const browser = await getBrowser();
   const context = await browser.newContext();
@@ -41,6 +42,7 @@ async function generatePDF(url: string, payload: any) {
     await page.pdf({ path: outputPath, format: "A4", printBackground: true });
 
     console.log(`✅ PDF saved at: ${outputPath}`);
+    console.timeEnd(`⏱️ Worker ${process.pid} PDF generation time`);
   } catch (error) {
     console.error("❌ Error generating PDF:", error);
   } finally {
